@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "redis-stateful.fullname" . }}
+  labels:
+    {{- include "redis-stateful.labels" . | nindent 4 }}
+spec:
+  {{- if eq .Values.exposure.type "nodeport" }}
+  type: NodePort
+  {{- else }}
+  type: {{ .Values.service.type }}
+  {{- end }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: redis
+      protocol: TCP
+      name: redis
+      {{- if eq .Values.exposure.type "nodeport" }}
+      nodePort: {{ .Values.exposure.nodePort }}
+      {{- end }}
+  selector:
+    {{- include "redis-stateful.selectorLabels" . | nindent 4 }}

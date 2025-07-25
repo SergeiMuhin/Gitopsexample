@@ -1,0 +1,18 @@
+{{- if .Values.service.headless.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "redis-stateful.fullname" . }}-headless
+  labels:
+    {{- include "redis-stateful.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  clusterIP: None  # This makes it headless
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: redis
+      protocol: TCP
+      name: redis
+  selector:
+    {{- include "redis-stateful.selectorLabels" . | nindent 4 }}
+{{- end }}

@@ -1,0 +1,32 @@
+# Default values for redis-stateful
+replicaCount: 1
+
+image:
+  repository: sergeimuhin/redis-stateful
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 6379
+  headless:
+    enabled: true
+
+persistence:
+  enabled: true
+  storageClass: ""  # Use default storage class
+  size: 1Gi
+  accessMode: ReadWriteOnce
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+# Exposure options
+exposure:
+  type: "nodeport"  # nodeport or ingress
+  nodePort: 30379
