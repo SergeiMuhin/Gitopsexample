@@ -2,7 +2,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches: [main]
-    paths: ['README.md', 'app/**']
+    paths: ['README.md', 'app/**', '.github/workflows/**']
 
 jobs:
   build-and-push:
@@ -19,7 +19,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ./app
           push: true
           tags: sergeimuhin/redis-stateful:${{ github.sha }}
       
