@@ -28,5 +28,5 @@ resources:
 
 # Exposure options
 exposure:
-  type: "nodeport"  # nodeport or ingress
+  type: "ingress"  # nodeport or ingress
   nodePort: 30379
