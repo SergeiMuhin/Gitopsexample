@@ -2,7 +2,7 @@
 replicaCount: 1
 
 image:
-  repository: sergeimuhin/redis-stateful
+  repository: sergeisin/redis-stateful
   tag: "latest"
   pullPolicy: IfNotPresent
 

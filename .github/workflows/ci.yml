@@ -1,0 +1,33 @@
+name: CI/CD Pipeline
+on:
+  push:
+    branches: [main]
+    paths: ['README.md', 'app/**']
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: sergeimuhin/redis-stateful:${{ github.sha }}
+      
+      - name: Update Helm values
+        run: |
+          sed -i "s/tag: \"latest\"/tag: \"${{ github.sha }}\"/" helm-chart/redis-stateful/values.yaml
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add helm-chart/redis-stateful/values.yaml
+          git commit -m "Update image tag to ${{ github.sha }}"
+          git push
