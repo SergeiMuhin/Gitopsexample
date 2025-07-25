@@ -21,7 +21,7 @@ jobs:
         with:
           context: ./app
           push: true
-          tags: sergeimuhin/redis-stateful:${{ github.sha }}
+          tags: sergeisin/redis-stateful:${{ github.sha }}
       
       - name: Update Helm values
         run: |
