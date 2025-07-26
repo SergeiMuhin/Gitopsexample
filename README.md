@@ -606,6 +606,32 @@ nodes:
 5. **KIND Limitations**: TCP stream forwarding complexity in local environments
 6. **Production Patterns**: How local choices translate to cloud environments
 
+### 🔧 Helm Chart Quality & Kubernetes Manifest Hygiene
+
+**Chart Structure and Standards:**
+- **Semantic versioning**: Follow SemVer for chart versions with automated bumping in CI/CD
+- **Chart linting**: Use `helm lint` and `ct lint` (chart-testing) in CI pipeline for validation
+- **Chart documentation**: Generate README.md from values.yaml using helm-docs
+- **Dependency management**: Pin chart dependencies with version ranges and lock files
+
+**Kubernetes Manifest Best Practices:**
+- **Resource management**: Define CPU/memory requests and limits for all containers
+- **Security contexts**: Run containers as non-root with read-only root filesystem
+- **Health checks**: Implement readiness and liveness probes for reliable deployments
+- **Labels and annotations**: Use consistent labeling strategy following Kubernetes recommended labels
+
+**Template Functions and Reusability:**
+- **Template helpers**: Create reusable template functions for common patterns (labels, selectors)
+- **Values validation**: Use JSON Schema or template conditionals to validate user inputs
+- **Multi-environment support**: Design templates to work across dev/staging/production environments
+- **Resource naming**: Use consistent naming conventions with release and chart name prefixes
+
+**Chart Testing and Quality Assurance:**
+- **Unit testing**: Test Helm templates with different values combinations
+- **Integration testing**: Deploy charts in test environments with chart-testing tool
+- **Security scanning**: Scan generated manifests for security misconfigurations
+- **Documentation testing**: Validate that chart documentation matches actual behavior
+
 ## 🚀 Production Readiness Extensions
 
 ## 🔐 Secret Management
