@@ -39,7 +39,7 @@ spec:
           exec:
             command: ["redis-cli", "ping"]
           initialDelaySeconds: 5
-          periodSeconds: 5
+          periodSeconds: 40
           timeoutSeconds: 3
           failureThreshold: 3
         volumeMounts:
