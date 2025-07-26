@@ -45,7 +45,7 @@ nodes:
         protocol: TCP
 EOF
 
-# Create cluster
+# Create cluster - !! Can use "infra/kind-config.yaml"
 kind create cluster --name gitops-demo --config kind-config.yaml
 kubectl config use-context kind-gitops-demo
 ```
@@ -87,6 +87,8 @@ kubectl -n argocd rollout restart deployment argocd-server
 ```
 
 ### 4. Configure ArgoCD Ingress
+- Can use "infra/argocd-ingress.yaml"
+- kubectl apply -f infra/argocd-ingress.yaml
 
 ```bash
 # Create ArgoCD ingress for web access
