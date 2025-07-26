@@ -3,7 +3,7 @@ replicaCount: 1
 
 image:
   repository: sergeisin/redis-stateful
-  tag: "9f3e273d4d64503711ee0bf8e072c767880458f0"
+  tag: "479217635e90ebc99353bbd8ba4791e118474b2f"
   pullPolicy: IfNotPresent
 
 service:
